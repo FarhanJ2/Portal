@@ -68,10 +68,6 @@ public class PlayerMovement : MonoBehaviour
 	public Transform player;
 	Vector3 udp;
 
-	// Ground-truth velocity, updated every FixedUpdate. Use this for UI/telemetry
-	// instead of computing velocity from position deltas in Update() — sampling
-	// position at render-frame rate against a FixedUpdate-driven controller causes
-	// a 0 / spike flicker, since most Update() frames see no position change at all.
 	public Vector3 Velocity => playerVelocity;
 
 	private void OnEnable()
@@ -93,19 +89,16 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Start()
 	{
-		//This is for UI, feel free to remove the Start() function.
 		lastPos = player.position;
 	}
 
-	// Update handles input reading and the UI/telemetry block, which are fine to
-	// run every rendered frame. Movement itself is integrated in FixedUpdate.
 	void Update()
 	{
-		#region //UI, Feel free to remove the region.
+		#region
 
 		moved = player.position - lastPos;
 		lastPos = player.position;
-		PlayerVel = moved / Time.fixedDeltaTime;
+		PlayerVel = moved / Time.deltaTime;
 
 		ZVelocity = Mathf.Abs(PlayerVel.z);
 		XVelocity = Mathf.Abs(PlayerVel.x);
@@ -118,13 +111,7 @@ public class PlayerMovement : MonoBehaviour
 		moveInput = Input.GetInstance().Player.Move.ReadValue<Vector2>();
 		x = moveInput.x;
 		z = moveInput.y;
-	}
 
-	// Movement integration runs on the fixed timestep so acceleration, friction,
-	// and air control feel consistent regardless of framerate — matches how
-	// Quake/Source-style movement was originally ticked.
-	void FixedUpdate()
-	{
 		IsGrounded = Physics.CheckSphere(GroundCheck.position, GroundDistance, GroundMask);
 
 		QueueJump();
@@ -136,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 			AirMove();
 
 		// Move the controller
-		controller.Move(playerVelocity * Time.fixedDeltaTime);
+		controller.Move(playerVelocity * Time.deltaTime);
 
 		// Calculate top velocity
 		udp = playerVelocity;
@@ -148,9 +135,6 @@ public class PlayerMovement : MonoBehaviour
 		jumpPressedThisFrame = false;
 	}
 
-	// Unity calls this automatically whenever controller.Move() collides with something.
-	// Without this, playerVelocity keeps pointing into whatever wall you hit, so every
-	// subsequent frame tries to shove you back into it — this is the bunnyhop-into-wall bug.
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
 		// Ignore the ground — that's handled separately by GroundMove/gravity reset
@@ -194,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
 		addspeed = wishspeed - currentspeed;
 		if (addspeed <= 0)
 			return;
-		accelspeed = accel * Time.fixedDeltaTime * wishspeed;
+		accelspeed = accel * Time.deltaTime * wishspeed;
 		if (accelspeed > addspeed)
 			accelspeed = addspeed;
 
@@ -239,7 +223,7 @@ public class PlayerMovement : MonoBehaviour
 		// !Aircontrol
 
 		// Apply gravity
-		playerVelocity.y += gravity * Time.fixedDeltaTime;
+		playerVelocity.y += gravity * Time.deltaTime;
 
 		/**
 			* Air control occurs when the player is in the air, it allows
@@ -261,7 +245,7 @@ public class PlayerMovement : MonoBehaviour
 
 			dot = Vector3.Dot(playerVelocity, wishdir);
 			k = 32;
-			k *= airControl * dot * dot * Time.fixedDeltaTime;
+			k *= airControl * dot * dot * Time.deltaTime;
 
 			// Change direction while slowing down
 			if (dot > 0)
@@ -326,7 +310,7 @@ public class PlayerMovement : MonoBehaviour
 			if (controller.isGrounded)
 			{
 				control = speed < runDeacceleration ? runDeacceleration : speed;
-				drop = control * friction * Time.fixedDeltaTime * t;
+				drop = control * friction * Time.deltaTime * t;
 			}
 
 			newspeed = speed - drop;
