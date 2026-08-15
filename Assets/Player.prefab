@@ -265,7 +265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraControl
   playerBody: {fileID: 8331273720959898142}
-  mouseSensitivity: 0.5
+  mouseSensitivity: 0.25
   minPitch: -90
   maxPitch: 90
 --- !u!1 &6198718581880738636

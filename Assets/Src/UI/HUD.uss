@@ -1,0 +1,81 @@
+.hud-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.crosshair {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+.crosshair-bar {
+    position: absolute;
+    background-color: rgba(0, 255, 0, 0.9);
+}
+
+.crosshair-vertical {
+    width: 2px;
+    height: 6px;
+    left: 9px;
+}
+
+.crosshair-horizontal {
+    height: 2px;
+    width: 6px;
+    top: 9px;
+}
+
+.crosshair-top {
+    top: 0;
+}
+
+.crosshair-bottom {
+    bottom: 0;
+}
+
+.crosshair-left {
+    left: 0;
+}
+
+.crosshair-right {
+    right: 0;
+}
+
+.crosshair-dot {
+    position: absolute;
+    left: 9px;
+    top: 9px;
+    width: 2px;
+    height: 2px;
+    background-color: rgba(0, 255, 0, 0.9);
+}
+
+.showpos-panel {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.35);
+}
+
+.showpos-line {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    -unity-font-style: normal;
+    -unity-font-definition: resource("Fonts/COUR");
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 1px 0;
+}
+
+.showpos-highlight {
+    color: rgb(80, 255, 80);
+}

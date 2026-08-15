@@ -1,0 +1,23 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="HUD.uss" />
+
+    <ui:VisualElement name="hud-root" class="hud-root" picking-mode="Ignore">
+
+        <!-- Crosshair: four bars around a center gap, Source/CS-style plus -->
+        <ui:VisualElement name="crosshair" class="crosshair" picking-mode="Ignore">
+            <ui:VisualElement name="crosshair-top" class="crosshair-bar crosshair-vertical crosshair-top" />
+            <ui:VisualElement name="crosshair-bottom" class="crosshair-bar crosshair-vertical crosshair-bottom" />
+            <ui:VisualElement name="crosshair-left" class="crosshair-bar crosshair-horizontal crosshair-left" />
+            <ui:VisualElement name="crosshair-right" class="crosshair-bar crosshair-horizontal crosshair-right" />
+            <ui:VisualElement name="crosshair-dot" class="crosshair-dot" />
+        </ui:VisualElement>
+
+        <!-- cl_showpos-style debug readout, top-left -->
+        <ui:VisualElement name="showpos-panel" class="showpos-panel" picking-mode="Ignore">
+            <ui:Label name="pos-label" text="pos: 0.00 0.00 0.00" class="showpos-line" />
+            <ui:Label name="ang-label" text="ang: 0.00 0.00 0.00" class="showpos-line" />
+            <ui:Label name="vel-label" text="vel: 0.00" class="showpos-line showpos-highlight" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+</ui:UXML>

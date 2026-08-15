@@ -68,6 +68,12 @@ public class PlayerMovement : MonoBehaviour
 	public Transform player;
 	Vector3 udp;
 
+	// Ground-truth velocity, updated every FixedUpdate. Use this for UI/telemetry
+	// instead of computing velocity from position deltas in Update() — sampling
+	// position at render-frame rate against a FixedUpdate-driven controller causes
+	// a 0 / spike flicker, since most Update() frames see no position change at all.
+	public Vector3 Velocity => playerVelocity;
+
 	private void OnEnable()
 	{
 		Input.GetInstance().Player.Enable();
@@ -219,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
 			accel = airAcceleration;
 
 		// If the player is ONLY strafing left or right
-		if (moveInput.x == 0 && moveInput.y != 0)
+		if (moveInput.y == 0 && moveInput.x != 0)
 		{
 			if (wishspeed > sideStrafeSpeed)
 				wishspeed = sideStrafeSpeed;
