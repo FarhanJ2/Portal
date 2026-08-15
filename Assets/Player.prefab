@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 5521121528208541506}
   - component: {fileID: 3667297767111292650}
   - component: {fileID: 3988179573253991550}
+  - component: {fileID: 2256073463155140696}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -268,6 +269,18 @@ MonoBehaviour:
   mouseSensitivity: 0.25
   minPitch: -90
   maxPitch: 90
+--- !u!114 &2256073463155140696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101225050942283753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 610c176296fa4df584dc7e86e2052396, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RaycastPortal
 --- !u!1 &6198718581880738636
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +293,8 @@ GameObject:
   - component: {fileID: 3771160863089914529}
   - component: {fileID: 4332115265258463831}
   - component: {fileID: 12920558859714038}
+  - component: {fileID: 5286465637070096626}
+  - component: {fileID: 3019125680732221751}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -384,6 +399,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dadd20cb82a529e40a4a3a38e668fa59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Input
+--- !u!114 &5286465637070096626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198718581880738636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f9efffb83bd39c48a6818ff6be87c70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PortalTraveller
+--- !u!114 &3019125680732221751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198718581880738636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 512ee3c316c09d74e9b2462e03c63fae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteract
+  camera: {fileID: 5097452488942635886}
 --- !u!1 &6264819363070198642
 GameObject:
   m_ObjectHideFlags: 0
