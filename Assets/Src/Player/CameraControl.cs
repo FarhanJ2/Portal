@@ -8,6 +8,9 @@ public class CameraControl : MonoBehaviour
     [SerializeField] private float minPitch = -90f;
     [SerializeField] private float maxPitch = 90f;
 
+    private static Vector3 angularVelocity;
+    public static Vector3 AngularVelocity => angularVelocity;
+    
     private Camera cam;
     private float pitch = 0f;
     void OnEnable()
@@ -41,6 +44,7 @@ public class CameraControl : MonoBehaviour
         float mouseY = lookInput.y * mouseSensitivity;
 
         playerBody.Rotate(Vector3.up * mouseX);
+        angularVelocity = Vector3.up * mouseX / Time.deltaTime;
 
         pitch -= mouseY;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);

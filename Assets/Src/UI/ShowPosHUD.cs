@@ -48,10 +48,7 @@ public class ShowPosHUD : MonoBehaviour
         Vector3 pos = player.position;
         Vector3 ang = player.eulerAngles;
 
-        // PlayerMovement.Velocity is the real internal velocity vector, updated every
-        // FixedUpdate — avoids the 0/spike flicker you'd get from position-delta math
-        // sampled at a different rate than the controller actually moves.
-        float speed = movement != null ? movement.Velocity.magnitude : 0f;
+        float speed = movement != null ? PlayerMovement.Velocity.magnitude : 0f;
 
         posLabel.text = $"pos: {pos.x:F2} {pos.y:F2} {pos.z:F2}";
         angLabel.text = $"ang: {ang.x:F2} {ang.y:F2} {ang.z:F2}";

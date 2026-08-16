@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public Vector3 moveDirection;
 	public Vector3 moveDirectionNorm;
-	private Vector3 playerVelocity;
+	private static Vector3 playerVelocity;
 	Vector3 wishdir;
 	Vector3 vec;
 
@@ -68,7 +68,7 @@ public class PlayerMovement : MonoBehaviour
 	public Transform player;
 	Vector3 udp;
 
-	public Vector3 Velocity => playerVelocity;
+	public static Vector3 Velocity => playerVelocity;
 
 	private void OnEnable()
 	{
