@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private Camera camera;
-    [SerializeField] private PlayerMovement movement;
     private float maxInteractDistance = 5f;
     private Object prev;
         

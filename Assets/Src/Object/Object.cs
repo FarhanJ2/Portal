@@ -11,6 +11,7 @@ public class Object : MonoBehaviour
     [SerializeField] private float minDistance = 1f;
     [SerializeField] private float maxDistance = 4f;
     [SerializeField] private float maxThrowSpeed = 12f;
+    [SerializeField] private LayerMask obstructionMask;
     private float holdDistance = 4f;
     
     private Vector3 currentHeldPosition = new Vector3();
@@ -53,20 +54,25 @@ public class Object : MonoBehaviour
     {
         if (isHeld)
         {
-            // check collider how close to a surface if close push the cube closer to the player camera
-            // holdDistance as a function of distance away from surface
-            
-            // Physics.Raycast(rb.position, rb.transform.forward, out RaycastHit hit);
-            Debug.DrawRay(rb.position, camera.transform.forward);
-            // holdDistance = Math.Min(hit.distance, maxDistance);
             if (camera != null)
             {
-                currentHeldPosition = camera.transform.position + camera.transform.forward * holdDistance;
+                Vector3 rayOrigin = camera.transform.position;
+                Vector3 rayDir = camera.transform.forward;
+                float targetDistance = maxDistance;
+                if (Physics.Raycast(rayOrigin, rayDir, out RaycastHit hit, maxDistance, obstructionMask))
+                {
+                    float objectRadius = coll.bounds.extents.magnitude;
+                    targetDistance = hit.distance - objectRadius;
+                }
+                holdDistance = Mathf.Clamp(targetDistance, minDistance, maxDistance);
+                currentHeldPosition = rayOrigin + rayDir * holdDistance;
                 appliedLinearVelocity = (currentHeldPosition - lastHeldPosition) / Time.fixedDeltaTime;
-                rb.position = camera.transform.position + camera.transform.forward * holdDistance;
-                rb.rotation = camera.transform.transform.rotation;
+                rb.position = currentHeldPosition;
+                rb.rotation = camera.transform.rotation;
                 lastHeldPosition = currentHeldPosition;
             }
         }
     }
 }
+
+

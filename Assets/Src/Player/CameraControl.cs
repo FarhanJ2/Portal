@@ -13,6 +13,8 @@ public class CameraControl : MonoBehaviour
     
     private Camera cam;
     private float pitch = 0f;
+    
+    public float Pitch => pitch;
     void OnEnable()
     {
         Input.GetInstance().Player.Enable();

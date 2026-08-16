@@ -2,12 +2,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class RaycastPortal : MonoBehaviour
+public class PortalGun : MonoBehaviour
 {
-    private Camera camera;
+    [SerializeField] private Camera camera;
     public void Start()
     {
-        camera = GetComponent<Camera>();
         // fireBluePortal = ctx => TryPlacePortal(ctx, true);
         // fireRedPortal = ctx => TryPlacePortal(ctx, false);
     }
@@ -25,6 +24,11 @@ public class RaycastPortal : MonoBehaviour
         Input.GetInstance().Player.Fire2.performed -= TryPlacePortal;
         Input.GetInstance().Player.Disable();
     }
+
+    // private void Update()
+    // {
+    //     transform.localRotation = Quaternion.Euler(camera.Pitch, 0f, 0f);
+    // }
 
     private void TryPlacePortal(InputAction.CallbackContext ctx)
     {
